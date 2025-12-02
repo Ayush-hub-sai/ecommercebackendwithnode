@@ -23,6 +23,13 @@ app.use('/api/recommendations', recommendationRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+
+// 👇 export app so Vercel can use it
+module.exports = app;
+
+// 👇 start server only for local development
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-});
+  });
+}
